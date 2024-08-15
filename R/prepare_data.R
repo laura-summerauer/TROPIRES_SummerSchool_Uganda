@@ -35,6 +35,7 @@ spc_tropsoc$abs <- spc_tropsoc$spc_mean
 
 spc_laura$core_id <- spc_laura$point_id
 spc_laura$land_use <- "cropland"
+spc_laura$abs <- spc_laura$spc_mean
 
 
 cols_sel <- c("sample_id", "core_id", "country_code", "lat", "long", "land_use", "depth", "TC_gkg", "abs")
