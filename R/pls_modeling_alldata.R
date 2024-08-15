@@ -70,6 +70,8 @@ pls_model <- caret::train(x = alldata$abs_pre,
                           preProcess = c("center", "scale"))
 
 
+saveRDS(pls_model, "out/pls_model/SOC_PLSmodel.rds")
+
 pls_model
 plot(pls_model)
 range(alldata$TC_gkg)
