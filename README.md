@@ -1,2 +1,2 @@
 # TROPIRES Summer School Uganda
-data for soil infrared calibration modeling exercises
+Data for soil near-infrared calibration modeling exercises
