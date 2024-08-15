@@ -4,7 +4,8 @@ TROPIRES Summer School Uganda August 19–23 2024
 - [Calibration data](#calibration-data)
   - [TropSOC data from Uganda (cropland and
     forest)](#tropsoc-data-from-uganda-cropland-and-forest)
-  - [Samples from PhD project Laura](#samples-from-phd-project-laura)
+  - [Uganda samples from PhD project
+    Laura](#uganda-samples-from-phd-project-laura)
   - [Calibration modeling
     (cross-validation)](#calibration-modeling-cross-validation)
     - [Pre-process / smoothen spectra](#pre-process--smoothen-spectra)
@@ -56,7 +57,7 @@ range(as.numeric(colnames(tropsoc_data$abs)))
 
     ## [1] 3920 7408
 
-## Samples from PhD project Laura
+## Uganda samples from PhD project Laura
 
 cropland samples only from:
 
@@ -192,20 +193,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 135, 135, 138, 137, 137, 135, ... 
+    ## Summary of sample sizes: 136, 136, 136, 137, 137, 135, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   ncomp  RMSE       Rsquared   MAE      
-    ##    1     12.238933  0.2491528  10.054748
-    ##    2     11.257560  0.3711529   9.009294
-    ##    3     10.356019  0.4772331   8.464809
-    ##    4      9.766097  0.5368541   7.743555
-    ##    5      8.638522  0.6394758   7.164671
-    ##    6      8.305312  0.6791765   7.029504
-    ##    7      6.844789  0.7765025   5.388401
-    ##    8      5.715564  0.8346323   4.445922
-    ##    9      5.443237  0.8517842   4.210469
-    ##   10      4.909349  0.8775332   3.869282
+    ##   ncomp  RMSE       Rsquared   MAE     
+    ##    1     12.233022  0.2514243  9.990460
+    ##    2     11.322565  0.3608598  9.001767
+    ##    3     10.376480  0.4666358  8.457358
+    ##    4      9.704510  0.5268055  7.739310
+    ##    5      8.564870  0.6403707  7.152650
+    ##    6      8.257484  0.6657864  7.003488
+    ##    7      6.673455  0.7813635  5.260524
+    ##    8      5.719879  0.8371301  4.517615
+    ##    9      5.430172  0.8548849  4.320771
+    ##   10      4.827731  0.8882699  3.732396
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -257,20 +258,20 @@ pls_model_iv
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 90, 93, 92, 91, 91, 90, ... 
+    ## Summary of sample sizes: 90, 90, 92, 92, 91, 89, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     12.041767  0.2745027  9.997320
-    ##    2     11.244537  0.3833168  9.262453
-    ##    3     10.800388  0.4291245  8.879407
-    ##    4     10.086885  0.5124458  8.126361
-    ##    5      9.155540  0.6372608  7.580643
-    ##    6      8.178088  0.7106456  6.849990
-    ##    7      7.626245  0.7818996  6.120622
-    ##    8      6.975834  0.8128793  5.432013
-    ##    9      6.179062  0.8475838  4.796784
-    ##   10      5.829515  0.8501411  4.641577
+    ##    1     11.976302  0.2827532  9.870819
+    ##    2     11.031333  0.3770476  9.008671
+    ##    3     10.445789  0.4706180  8.640808
+    ##    4      9.817329  0.5359411  7.978393
+    ##    5      8.595038  0.6550130  7.254332
+    ##    6      8.406437  0.6692635  7.059173
+    ##    7      7.189064  0.7499136  5.911572
+    ##    8      6.157320  0.8130983  4.827566
+    ##    9      5.735034  0.8299074  4.584180
+    ##   10      5.334044  0.8632148  4.229777
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 9.

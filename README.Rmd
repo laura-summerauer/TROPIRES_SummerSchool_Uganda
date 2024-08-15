@@ -40,7 +40,7 @@ range(as.numeric(colnames(tropsoc_data$abs)))
 ```
 
 
-## Samples from PhD project Laura
+## Uganda samples from PhD project Laura
 
 cropland samples only from:
 
