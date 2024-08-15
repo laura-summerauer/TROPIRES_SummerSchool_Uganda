@@ -1,6 +1,8 @@
 ---
 title: "TROPIRES Summer School Uganda August 19–23 2024"
-output: github_document
+output: 
+  github_document:
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -49,7 +51,7 @@ laura_data <- readRDS("data/calibration_data/NIRabs_PhDLaura_Uganda.rds")
 str(laura_data)
 ```
 
-# Calibration modeling
+# Calibration modeling (cross-validation)
 
 - Use here merged TropSOC and Laura samples (except volcanic Saaka samples)
 - 151 samples
@@ -138,5 +140,45 @@ source("R/pls_eval.R")
 
 eval <- pls_val_plot(pls_object = pls_model, data = alldata, ID = "sample_id", property = "TC", unit = "g/kg", label = "SOC", val_type = "CV")
 eval$p_calval
+```
+
+
+# Calibration modeling (independent validation)
+
+
+```{r}
+# kennard-Stone sampling for independent validation
+kS <- prospectr::kenStone(X = alldata$abs_pre, k = 2/3*nrow(alldata),
+               metric = "mahal", pc = 10,
+               # group = as.factor(alldata$core_id),
+               .center = TRUE, .scale = FALSE)
+
+
+calset <- alldata[kS$model,]
+valset <- alldata[kS$test,]
+
+calset$rowIndex <- c(1:nrow(calset))
+
+## train a pls regression model
+pls_model_iv <- caret::train(x = calset$abs_pre,
+                          y = calset$TC_gkg,
+                          method = "pls",
+                          tuneLength = pls_ncomp_max,
+                          trControl = train_control,
+                          preProcess = c("center", "scale"))
+
+pls_model_iv
+
+
+
+```
+
+
+```{r echo = FALSE}
+ind_validation <- pls_val_plot(pls_object = pls_model_iv, data = calset, ID = "sample_id",
+                               property = "TC_gkg", unit = "g/kg", label = "SOC",
+                               val_type = "ind_val", valset = valset)
+
+ind_validation$p_calval
 ```
 

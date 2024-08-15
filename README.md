@@ -1,6 +1,20 @@
 TROPIRES Summer School Uganda August 19–23 2024
 ================
 
+- [Data overview](#data-overview)
+  - [TropSOC data from Uganda (cropland and
+    forest)](#tropsoc-data-from-uganda-cropland-and-forest)
+    - [Absorbance spectra in NIR
+      range](#absorbance-spectra-in-nir-range)
+  - [Samples from PhD project Laura](#samples-from-phd-project-laura)
+- [Calibration modeling
+  (cross-validation)](#calibration-modeling-cross-validation)
+  - [Pre-process / smoothen spectra](#pre-process--smoothen-spectra)
+  - [Visualization](#visualization)
+  - [PLS modeling](#pls-modeling)
+- [Calibration modeling (independent
+  validation)](#calibration-modeling-independent-validation)
+
 Data for soil near-infrared calibration modeling exercises
 
 Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer
@@ -73,7 +87,7 @@ str(laura_data)
     ##   .. ..$ : NULL
     ##   .. ..$ : chr [1:1745] "7408" "7406" "7404" "7402" ...
 
-# Calibration modeling
+# Calibration modeling (cross-validation)
 
 - Use here merged TropSOC and Laura samples (except volcanic Saaka
   samples)
@@ -179,20 +193,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 135, 136, 137, 135, 138, 135, ... 
+    ## Summary of sample sizes: 136, 135, 137, 136, 136, 136, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE      
-    ##    1     12.189455  0.2634334  10.074670
-    ##    2     11.214014  0.3518924   9.033373
-    ##    3     10.334903  0.4270683   8.362651
-    ##    4      9.664797  0.5026139   7.610964
-    ##    5      8.791571  0.6315563   7.188095
-    ##    6      8.355115  0.6482185   7.073286
-    ##    7      6.850762  0.7742630   5.396796
-    ##    8      5.897857  0.8368556   4.638463
-    ##    9      5.411480  0.8686119   4.127582
-    ##   10      5.131408  0.8812500   3.939227
+    ##    1     12.089506  0.2647102  10.043177
+    ##    2     11.183143  0.3676815   9.017639
+    ##    3     10.458033  0.4560164   8.509421
+    ##    4      9.695198  0.5248048   7.758354
+    ##    5      8.457360  0.6483094   6.916898
+    ##    6      8.125645  0.6705847   6.810440
+    ##    7      6.674624  0.7791667   5.296012
+    ##    8      5.850321  0.8267546   4.514791
+    ##    9      5.343789  0.8524816   4.219340
+    ##   10      4.951271  0.8758906   3.823780
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -210,3 +224,56 @@ range(alldata$TC_gkg)
     ## [1]  0.334 54.860
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+# Calibration modeling (independent validation)
+
+``` r
+# kennard-Stone sampling for independent validation
+kS <- prospectr::kenStone(X = alldata$abs_pre, k = 2/3*nrow(alldata),
+               metric = "mahal", pc = 10,
+               # group = as.factor(alldata$core_id),
+               .center = TRUE, .scale = FALSE)
+
+
+calset <- alldata[kS$model,]
+valset <- alldata[kS$test,]
+
+calset$rowIndex <- c(1:nrow(calset))
+
+## train a pls regression model
+pls_model_iv <- caret::train(x = calset$abs_pre,
+                          y = calset$TC_gkg,
+                          method = "pls",
+                          tuneLength = pls_ncomp_max,
+                          trControl = train_control,
+                          preProcess = c("center", "scale"))
+
+pls_model_iv
+```
+
+    ## Partial Least Squares 
+    ## 
+    ##  101 samples
+    ## 1727 predictors
+    ## 
+    ## Pre-processing: centered (1727), scaled (1727) 
+    ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
+    ## Summary of sample sizes: 91, 90, 92, 92, 90, 92, ... 
+    ## Resampling results across tuning parameters:
+    ## 
+    ##   ncomp  RMSE       Rsquared   MAE      
+    ##    1     12.116122  0.3116348  10.010516
+    ##    2     11.316346  0.4249590   9.289510
+    ##    3     10.753785  0.4482945   8.937809
+    ##    4     10.170733  0.5214769   8.353548
+    ##    5      8.858732  0.6472032   7.428878
+    ##    6      8.584578  0.6606153   7.265103
+    ##    7      7.771527  0.7336182   6.289010
+    ##    8      6.773612  0.8044058   5.243287
+    ##    9      6.243835  0.8207086   4.899525
+    ##   10      5.728490  0.8463005   4.527086
+    ## 
+    ## RMSE was used to select the optimal model using  the one SE rule.
+    ## The final value used for the model was ncomp = 9.
+
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
