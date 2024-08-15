@@ -1,25 +1,25 @@
 TROPIRES Summer School Uganda August 19–23 2024
 ================
 
-- [Data overview](#data-overview)
+- [Calibration data](#calibration-data)
   - [TropSOC data from Uganda (cropland and
     forest)](#tropsoc-data-from-uganda-cropland-and-forest)
-    - [Absorbance spectra in NIR
-      range](#absorbance-spectra-in-nir-range)
   - [Samples from PhD project Laura](#samples-from-phd-project-laura)
-- [Calibration modeling
-  (cross-validation)](#calibration-modeling-cross-validation)
-  - [Pre-process / smoothen spectra](#pre-process--smoothen-spectra)
-  - [Visualization](#visualization)
-  - [PLS modeling](#pls-modeling)
-- [Calibration modeling (independent
-  validation)](#calibration-modeling-independent-validation)
+  - [Calibration modeling
+    (cross-validation)](#calibration-modeling-cross-validation)
+    - [Pre-process / smoothen spectra](#pre-process--smoothen-spectra)
+    - [Visualization](#visualization)
+    - [PLS modeling](#pls-modeling)
+  - [Calibration modeling (independent
+    validation)](#calibration-modeling-independent-validation)
+- [Validation samples](#validation-samples)
+- [Prediction samples](#prediction-samples)
 
-Data for soil near-infrared calibration modeling exercises
+**Data for soil near-infrared calibration modeling exercises**
 
-Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer
+*Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer*
 
-# Data overview
+# Calibration data
 
 ## TropSOC data from Uganda (cropland and forest)
 
@@ -47,8 +47,7 @@ str(tropsoc_data)
     ##   .. ..$ : NULL
     ##   .. ..$ : chr [1:1745] "7408" "7406" "7404" "7402" ...
 
-### Absorbance spectra in NIR range
-
+- Absorbance spectra in NIR range
 - Units are wavenumbers (1 / cm)
 
 ``` r
@@ -87,7 +86,7 @@ str(laura_data)
     ##   .. ..$ : NULL
     ##   .. ..$ : chr [1:1745] "7408" "7406" "7404" "7402" ...
 
-# Calibration modeling (cross-validation)
+## Calibration modeling (cross-validation)
 
 - Use here merged TropSOC and Laura samples (except volcanic Saaka
   samples)
@@ -113,7 +112,7 @@ str(alldata)
     ##   .. ..$ : NULL
     ##   .. ..$ : chr [1:1745] "7408" "7406" "7404" "7402" ...
 
-## Pre-process / smoothen spectra
+### Pre-process / smoothen spectra
 
 ``` r
 wavs <- as.numeric(colnames(alldata$abs))
@@ -126,7 +125,7 @@ alldata$abs_pre <- alldata$abs |>
   # savitzkyGolay(m = 2, p = 2, w = 17) 
 ```
 
-## Visualization
+### Visualization
 
 ``` r
 # raw absorbance
@@ -156,7 +155,7 @@ matplot(x = as.numeric(colnames(alldata$abs_pre)), y = alldata$abs_pre[1,],
 
 ![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
 
-## PLS modeling
+### PLS modeling
 
 ``` r
 library(caret)
@@ -193,20 +192,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 135, 137, 135, 136, 137, 136, ... 
+    ## Summary of sample sizes: 135, 135, 138, 137, 137, 135, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE      
-    ##    1     12.178726  0.2589617  10.029109
-    ##    2     11.213387  0.3696282   9.034559
-    ##    3     10.360286  0.4516112   8.422975
-    ##    4      9.686226  0.5189916   7.723089
-    ##    5      8.515618  0.6512602   7.099686
-    ##    6      8.068875  0.6854908   6.761423
-    ##    7      6.670518  0.7900527   5.282756
-    ##    8      5.812948  0.8433361   4.577124
-    ##    9      5.247030  0.8707254   4.107560
-    ##   10      4.904454  0.8902513   3.756511
+    ##    1     12.238933  0.2491528  10.054748
+    ##    2     11.257560  0.3711529   9.009294
+    ##    3     10.356019  0.4772331   8.464809
+    ##    4      9.766097  0.5368541   7.743555
+    ##    5      8.638522  0.6394758   7.164671
+    ##    6      8.305312  0.6791765   7.029504
+    ##    7      6.844789  0.7765025   5.388401
+    ##    8      5.715564  0.8346323   4.445922
+    ##    9      5.443237  0.8517842   4.210469
+    ##   10      4.909349  0.8775332   3.869282
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -225,7 +224,7 @@ range(alldata$TC_gkg)
 
 ![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
-# Calibration modeling (independent validation)
+## Calibration modeling (independent validation)
 
 ``` r
 # kennard-Stone sampling for independent validation
@@ -258,22 +257,78 @@ pls_model_iv
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 91, 91, 93, 91, 91, 89, ... 
+    ## Summary of sample sizes: 90, 93, 92, 91, 91, 90, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     11.864448  0.3341853  9.997683
-    ##    2     11.030310  0.4340997  9.174372
-    ##    3     10.753252  0.4595938  8.958668
-    ##    4     10.042651  0.5326700  8.228529
-    ##    5      8.863269  0.6536931  7.345644
-    ##    6      8.560548  0.6836322  7.233586
-    ##    7      7.427885  0.7433091  5.921165
-    ##    8      6.611823  0.8029454  5.312922
-    ##    9      6.232088  0.8238789  4.970096
-    ##   10      5.883511  0.8482801  4.724376
+    ##    1     12.041767  0.2745027  9.997320
+    ##    2     11.244537  0.3833168  9.262453
+    ##    3     10.800388  0.4291245  8.879407
+    ##    4     10.086885  0.5124458  8.126361
+    ##    5      9.155540  0.6372608  7.580643
+    ##    6      8.178088  0.7106456  6.849990
+    ##    7      7.626245  0.7818996  6.120622
+    ##    8      6.975834  0.8128793  5.432013
+    ##    9      6.179062  0.8475838  4.796784
+    ##   10      5.829515  0.8501411  4.641577
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 9.
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+# Validation samples
+
+These validation samples will be measured with an infrared spectrometer.
+Since we have available SOC data from the laboratory, we can use these
+samples to validate our models.
+
+- Samples were provided by Matt Cooper
+- Samples from Kibale National Park
+- Dried, sieved and ground soil
+- Reference SOC data were measured at ETH Zurich using dry combustion
+
+``` r
+validation_samples <- read_csv("data/validation_samples/validation_samples.csv")
+
+head(validation_samples)
+```
+
+    ## # A tibble: 6 × 10
+    ##   sample_id core_id depth_start depth_end increment_length   lat  long Location
+    ##   <chr>     <chr>         <dbl>     <dbl>            <dbl> <dbl> <dbl> <chr>   
+    ## 1 1052_1020 1052             10        20               10 0.405  30.3 Active  
+    ## 2 1053_0010 1053              0        10               10 0.405  30.3 Active  
+    ## 3 1093_0010 1093              0        10               10 0.387  30.3 Active  
+    ## 4 1151_0010 1151              0        10               10 0.389  30.3 Active  
+    ## 5 1273_8090 1273             80        90               10 0.306  30.3 Active  
+    ## 6 2012_0010 2012              0        10               10 0.387  30.3 Active  
+    ## # ℹ 2 more variables: History <chr>, TC_gkg <dbl>
+
+# Prediction samples
+
+These prediction samples will be measured with an infrared spectrometer.
+After knowing the uncertainty of such prediction models by the
+validation samples (above), we can use the established model to predict
+SOC data for these samples.
+
+- Samples were provided by Matt Cooper (2 contrasting soil cores)
+- Samples from Kibale National Park
+- Dried, sieved and ground soil
+
+``` r
+prediction_samples <- read_csv("data/prediction_samples/prediction_samples.csv")
+
+head(prediction_samples)
+```
+
+    ## # A tibble: 6 × 9
+    ##   sample_id core_id depth_start depth_end increment_length   lat  long Location
+    ##   <chr>       <dbl>       <dbl>     <dbl>            <dbl> <dbl> <dbl> <chr>   
+    ## 1 1093_0010    1093           0        10               10 0.387  30.3 Active  
+    ## 2 1093_1020    1093          10        20               10 0.387  30.3 Active  
+    ## 3 1093_2030    1093          20        30               10 0.387  30.3 Active  
+    ## 4 1093_3040    1093          30        40               10 0.387  30.3 Active  
+    ## 5 1093_4050    1093          40        50               10 0.387  30.3 Active  
+    ## 6 1093_5060    1093          50        60               10 0.387  30.3 Active  
+    ## # ℹ 1 more variable: History <chr>

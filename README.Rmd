@@ -1,20 +1,25 @@
 ---
 title: "TROPIRES Summer School Uganda August 19–23 2024"
+subtitle: "Test"
 output: 
   github_document:
     toc: true
 ---
 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-Data for soil near-infrared calibration modeling exercises
 
-Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer
+**Data for soil near-infrared calibration modeling exercises**
+
+*Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer*
 
 
-# Data overview
+
+# Calibration data
 
 ## TropSOC data from Uganda (cropland and forest)
 
@@ -27,8 +32,7 @@ tropsoc_data <- readRDS("data/calibration_data/NIRabs_TropSOC_Uganda.rds")
 str(tropsoc_data)
 ```
 
-### Absorbance spectra in NIR range
-
+- Absorbance spectra in NIR range
 - Units are wavenumbers (1 / cm)
 
 ```{r}
@@ -51,7 +55,7 @@ laura_data <- readRDS("data/calibration_data/NIRabs_PhDLaura_Uganda.rds")
 str(laura_data)
 ```
 
-# Calibration modeling (cross-validation)
+## Calibration modeling (cross-validation)
 
 - Use here merged TropSOC and Laura samples (except volcanic Saaka samples)
 - 151 samples
@@ -62,7 +66,7 @@ alldata <- readRDS("data/calibration_data/NIRabs_allUganda_noSaaka.rds")
 str(alldata)
 ```
 
-## Pre-process / smoothen spectra
+### Pre-process / smoothen spectra
 
 ```{r}
 wavs <- as.numeric(colnames(alldata$abs))
@@ -75,7 +79,7 @@ alldata$abs_pre <- alldata$abs |>
   # savitzkyGolay(m = 2, p = 2, w = 17) 
 ```
 
-## Visualization
+### Visualization
 
 ```{r}
 # raw absorbance
@@ -100,7 +104,7 @@ matplot(x = as.numeric(colnames(alldata$abs_pre)), y = alldata$abs_pre[1,],
 ```
 
 
-## PLS modeling
+### PLS modeling
 
 ```{r}
 library(caret)
@@ -143,7 +147,7 @@ eval$p_calval
 ```
 
 
-# Calibration modeling (independent validation)
+## Calibration modeling (independent validation)
 
 
 ```{r}
@@ -180,5 +184,37 @@ ind_validation <- pls_val_plot(pls_object = pls_model_iv, data = calset, ID = "s
                                val_type = "ind_val", valset = valset)
 
 ind_validation$p_calval
+```
+
+
+
+# Validation samples
+
+These validation samples will be measured with an infrared spectrometer. Since we have available SOC data from the laboratory, we can use these samples to validate our models. 
+
+- Samples were provided by Matt Cooper
+- Samples from Kibale National Park
+- Dried, sieved and ground soil
+- Reference SOC data were measured at ETH Zurich using dry combustion
+
+```{r}
+validation_samples <- read_csv("data/validation_samples/validation_samples.csv")
+
+head(validation_samples)
+```
+
+
+# Prediction samples
+
+These prediction samples will be measured with an infrared spectrometer. After knowing the uncertainty of such prediction models by the validation samples (above), we can use the established model to predict SOC data for these samples. 
+
+- Samples were provided by Matt Cooper (2 contrasting soil cores)
+- Samples from Kibale National Park
+- Dried, sieved and ground soil
+
+```{r}
+prediction_samples <- read_csv("data/prediction_samples/prediction_samples.csv")
+
+head(prediction_samples)
 ```
 
