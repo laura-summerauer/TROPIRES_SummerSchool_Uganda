@@ -1,0 +1,10 @@
+---
+title: "TROPIRES Summer School Uganda"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Data for soil near-infrared calibration modeling exercises
