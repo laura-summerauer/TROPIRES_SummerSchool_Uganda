@@ -18,7 +18,7 @@ Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer
 
 ## TropSOC data from Uganda (cropland and forest)
 
-- Forest samples come from the Kibale National Park
+- Forest samples were taken from the Kibale National Park
 - Cropland samples were taken from the Rwenzori foothills, West of Kibale National Park
 
 ```{r}
@@ -43,7 +43,7 @@ cropland samples only from:
 - Rwenzori foothills (West of Kibale NP) 
 - East of Kibale NP
 - Saaka / volcanic area in Fort Portal (Saaka University campus)
-- I very much recommend to **remove Saaka samples from modeling**, since these are substantially different from all the other samples!! 
+- I very much recommend to **remove Saaka samples prior to modeling**, since these are substantially different from all the other samples!! 
 
 ```{r}
 laura_data <- readRDS("data/calibration_data/NIRabs_PhDLaura_Uganda.rds")

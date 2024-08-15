@@ -23,7 +23,7 @@ Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer
 
 ## TropSOC data from Uganda (cropland and forest)
 
-- Forest samples come from the Kibale National Park
+- Forest samples were taken from the Kibale National Park
 - Cropland samples were taken from the Rwenzori foothills, West of
   Kibale National Park
 
@@ -64,8 +64,8 @@ cropland samples only from:
 - Rwenzori foothills (West of Kibale NP)
 - East of Kibale NP
 - Saaka / volcanic area in Fort Portal (Saaka University campus)
-- I very much recommend to **remove Saaka samples from modeling**, since
-  these are substantially different from all the other samples!!
+- I very much recommend to **remove Saaka samples prior to modeling**,
+  since these are substantially different from all the other samples!!
 
 ``` r
 laura_data <- readRDS("data/calibration_data/NIRabs_PhDLaura_Uganda.rds")
@@ -193,20 +193,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 136, 135, 137, 136, 136, 136, ... 
+    ## Summary of sample sizes: 135, 137, 135, 136, 137, 136, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE      
-    ##    1     12.089506  0.2647102  10.043177
-    ##    2     11.183143  0.3676815   9.017639
-    ##    3     10.458033  0.4560164   8.509421
-    ##    4      9.695198  0.5248048   7.758354
-    ##    5      8.457360  0.6483094   6.916898
-    ##    6      8.125645  0.6705847   6.810440
-    ##    7      6.674624  0.7791667   5.296012
-    ##    8      5.850321  0.8267546   4.514791
-    ##    9      5.343789  0.8524816   4.219340
-    ##   10      4.951271  0.8758906   3.823780
+    ##    1     12.178726  0.2589617  10.029109
+    ##    2     11.213387  0.3696282   9.034559
+    ##    3     10.360286  0.4516112   8.422975
+    ##    4      9.686226  0.5189916   7.723089
+    ##    5      8.515618  0.6512602   7.099686
+    ##    6      8.068875  0.6854908   6.761423
+    ##    7      6.670518  0.7900527   5.282756
+    ##    8      5.812948  0.8433361   4.577124
+    ##    9      5.247030  0.8707254   4.107560
+    ##   10      4.904454  0.8902513   3.756511
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -258,20 +258,20 @@ pls_model_iv
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 91, 90, 92, 92, 90, 92, ... 
+    ## Summary of sample sizes: 91, 91, 93, 91, 91, 89, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   ncomp  RMSE       Rsquared   MAE      
-    ##    1     12.116122  0.3116348  10.010516
-    ##    2     11.316346  0.4249590   9.289510
-    ##    3     10.753785  0.4482945   8.937809
-    ##    4     10.170733  0.5214769   8.353548
-    ##    5      8.858732  0.6472032   7.428878
-    ##    6      8.584578  0.6606153   7.265103
-    ##    7      7.771527  0.7336182   6.289010
-    ##    8      6.773612  0.8044058   5.243287
-    ##    9      6.243835  0.8207086   4.899525
-    ##   10      5.728490  0.8463005   4.527086
+    ##   ncomp  RMSE       Rsquared   MAE     
+    ##    1     11.864448  0.3341853  9.997683
+    ##    2     11.030310  0.4340997  9.174372
+    ##    3     10.753252  0.4595938  8.958668
+    ##    4     10.042651  0.5326700  8.228529
+    ##    5      8.863269  0.6536931  7.345644
+    ##    6      8.560548  0.6836322  7.233586
+    ##    7      7.427885  0.7433091  5.921165
+    ##    8      6.611823  0.8029454  5.312922
+    ##    9      6.232088  0.8238789  4.970096
+    ##   10      5.883511  0.8482801  4.724376
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 9.
