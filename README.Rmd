@@ -86,6 +86,17 @@ alldata$abs_pre <- alldata$abs |>
 ### Visualization
 
 ```{r}
+# all raw spectra
+matplot(x = as.numeric(colnames(alldata$abs)), y = t(alldata$abs),
+        xlab = expression(paste("Wavenumber ", cm^{-1})),
+        ylab = 'Absorbance',
+        type = 'l',
+        lty = 1, 
+        main = "All raw spectra",
+        # ylim = c(0.2, 0.8),
+        xlim = c(7500, 3900))
+
+
 # raw absorbance
 matplot(x = as.numeric(colnames(alldata$abs)), y = alldata$abs[1,],
         xlab = expression(paste("Wavenumber ", cm^{-1})),

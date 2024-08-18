@@ -131,6 +131,20 @@ alldata$abs_pre <- alldata$abs |>
 ### Visualization
 
 ``` r
+# all raw spectra
+matplot(x = as.numeric(colnames(alldata$abs)), y = t(alldata$abs),
+        xlab = expression(paste("Wavenumber ", cm^{-1})),
+        ylab = 'Absorbance',
+        type = 'l',
+        lty = 1, 
+        main = "All raw spectra",
+        # ylim = c(0.2, 0.8),
+        xlim = c(7500, 3900))
+```
+
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
 # raw absorbance
 matplot(x = as.numeric(colnames(alldata$abs)), y = alldata$abs[1,],
         xlab = expression(paste("Wavenumber ", cm^{-1})),
@@ -142,7 +156,7 @@ matplot(x = as.numeric(colnames(alldata$abs)), y = alldata$abs[1,],
         xlim = c(7500, 3900))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
 
 ``` r
 # pre-processed absorbance data
@@ -156,7 +170,7 @@ matplot(x = as.numeric(colnames(alldata$abs_pre)), y = alldata$abs_pre[1,],
         xlim = c(7500, 3900))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-3.png)<!-- -->
 
 ### PLS modeling
 
@@ -195,20 +209,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 135, 137, 135, 136, 136, 137, ... 
+    ## Summary of sample sizes: 135, 135, 137, 136, 136, 137, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     12.080374  0.2543129  9.980546
-    ##    2     11.045275  0.3627028  8.924150
-    ##    3     10.207985  0.4615876  8.374353
-    ##    4      9.509799  0.5400361  7.624794
-    ##    5      8.701943  0.6512763  7.221147
-    ##    6      8.212535  0.6665924  6.969754
-    ##    7      6.674558  0.7897031  5.319061
-    ##    8      5.601007  0.8421400  4.365150
-    ##    9      5.297296  0.8662382  4.134605
-    ##   10      4.813923  0.8872509  3.720502
+    ##   ncomp  RMSE       Rsquared   MAE      
+    ##    1     12.194783  0.2703389  10.110111
+    ##    2     11.199263  0.3537343   9.064490
+    ##    3     10.411479  0.4517312   8.500156
+    ##    4      9.830827  0.5223242   7.771054
+    ##    5      8.776627  0.6479163   7.114029
+    ##    6      8.351405  0.6747369   7.006719
+    ##    7      6.833069  0.7942943   5.353469
+    ##    8      5.941469  0.8389329   4.680693
+    ##    9      5.530052  0.8637208   4.291284
+    ##   10      5.101805  0.8859516   3.870953
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -260,23 +274,23 @@ pls_model_iv
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 90, 90, 91, 90, 91, 92, ... 
+    ## Summary of sample sizes: 91, 91, 89, 89, 91, 93, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     12.081954  0.2412592  9.949465
-    ##    2     11.203094  0.3548182  9.086711
-    ##    3     10.588919  0.4283982  8.668112
-    ##    4      9.918314  0.5191765  8.025997
-    ##    5      8.703050  0.6175356  7.236534
-    ##    6      8.467155  0.6520597  7.123535
-    ##    7      7.246866  0.7549499  5.891459
-    ##    8      6.293280  0.8163976  5.006314
-    ##    9      5.974449  0.8405760  4.679894
-    ##   10      5.553139  0.8504807  4.321611
+    ##   ncomp  RMSE       Rsquared   MAE      
+    ##    1     12.166871  0.2676957  10.004884
+    ##    2     11.337233  0.3665397   9.287658
+    ##    3     10.891713  0.3922176   9.050040
+    ##    4     10.292070  0.4959643   8.317907
+    ##    5      8.854868  0.6069749   7.368358
+    ##    6      8.296293  0.6484050   7.041157
+    ##    7      7.204397  0.7037970   5.871115
+    ##    8      6.503461  0.7779961   5.170102
+    ##    9      6.485436  0.7922222   5.044982
+    ##   10      5.768311  0.8385277   4.542835
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
-    ## The final value used for the model was ncomp = 9.
+    ## The final value used for the model was ncomp = 10.
 
 ![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
