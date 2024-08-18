@@ -20,6 +20,8 @@ TROPIRES Summer School Uganda August 19–23 2024
 
 *Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer*
 
+<img src="figures/map_overview_sets.png" width="3507" />
+
 # Calibration data
 
 ## TropSOC data from Uganda (cropland and forest)
@@ -140,7 +142,7 @@ matplot(x = as.numeric(colnames(alldata$abs)), y = alldata$abs[1,],
         xlim = c(7500, 3900))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ``` r
 # pre-processed absorbance data
@@ -154,7 +156,7 @@ matplot(x = as.numeric(colnames(alldata$abs_pre)), y = alldata$abs_pre[1,],
         xlim = c(7500, 3900))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-2.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
 
 ### PLS modeling
 
@@ -193,20 +195,20 @@ pls_model
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 136, 136, 136, 137, 137, 135, ... 
+    ## Summary of sample sizes: 135, 137, 135, 136, 136, 137, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     12.233022  0.2514243  9.990460
-    ##    2     11.322565  0.3608598  9.001767
-    ##    3     10.376480  0.4666358  8.457358
-    ##    4      9.704510  0.5268055  7.739310
-    ##    5      8.564870  0.6403707  7.152650
-    ##    6      8.257484  0.6657864  7.003488
-    ##    7      6.673455  0.7813635  5.260524
-    ##    8      5.719879  0.8371301  4.517615
-    ##    9      5.430172  0.8548849  4.320771
-    ##   10      4.827731  0.8882699  3.732396
+    ##    1     12.080374  0.2543129  9.980546
+    ##    2     11.045275  0.3627028  8.924150
+    ##    3     10.207985  0.4615876  8.374353
+    ##    4      9.509799  0.5400361  7.624794
+    ##    5      8.701943  0.6512763  7.221147
+    ##    6      8.212535  0.6665924  6.969754
+    ##    7      6.674558  0.7897031  5.319061
+    ##    8      5.601007  0.8421400  4.365150
+    ##    9      5.297296  0.8662382  4.134605
+    ##   10      4.813923  0.8872509  3.720502
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 10.
@@ -215,7 +217,7 @@ pls_model
 plot(pls_model)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
 
 ``` r
 range(alldata$TC_gkg)
@@ -223,7 +225,7 @@ range(alldata$TC_gkg)
 
     ## [1]  0.334 54.860
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
 ## Calibration modeling (independent validation)
 
@@ -258,25 +260,25 @@ pls_model_iv
     ## 
     ## Pre-processing: centered (1727), scaled (1727) 
     ## Resampling: Cross-Validated (10 fold, repeated 1 times) 
-    ## Summary of sample sizes: 90, 90, 92, 92, 91, 89, ... 
+    ## Summary of sample sizes: 90, 90, 91, 90, 91, 92, ... 
     ## Resampling results across tuning parameters:
     ## 
     ##   ncomp  RMSE       Rsquared   MAE     
-    ##    1     11.976302  0.2827532  9.870819
-    ##    2     11.031333  0.3770476  9.008671
-    ##    3     10.445789  0.4706180  8.640808
-    ##    4      9.817329  0.5359411  7.978393
-    ##    5      8.595038  0.6550130  7.254332
-    ##    6      8.406437  0.6692635  7.059173
-    ##    7      7.189064  0.7499136  5.911572
-    ##    8      6.157320  0.8130983  4.827566
-    ##    9      5.735034  0.8299074  4.584180
-    ##   10      5.334044  0.8632148  4.229777
+    ##    1     12.081954  0.2412592  9.949465
+    ##    2     11.203094  0.3548182  9.086711
+    ##    3     10.588919  0.4283982  8.668112
+    ##    4      9.918314  0.5191765  8.025997
+    ##    5      8.703050  0.6175356  7.236534
+    ##    6      8.467155  0.6520597  7.123535
+    ##    7      7.246866  0.7549499  5.891459
+    ##    8      6.293280  0.8163976  5.006314
+    ##    9      5.974449  0.8405760  4.679894
+    ##   10      5.553139  0.8504807  4.321611
     ## 
     ## RMSE was used to select the optimal model using  the one SE rule.
     ## The final value used for the model was ncomp = 9.
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 # Validation samples
 
@@ -296,14 +298,14 @@ head(validation_samples)
 ```
 
     ## # A tibble: 6 × 10
-    ##   sample_id core_id depth_start depth_end increment_length   lat  long Location
-    ##   <chr>     <chr>         <dbl>     <dbl>            <dbl> <dbl> <dbl> <chr>   
-    ## 1 1052_1020 1052             10        20               10 0.405  30.3 Active  
-    ## 2 1053_0010 1053              0        10               10 0.405  30.3 Active  
-    ## 3 1093_0010 1093              0        10               10 0.387  30.3 Active  
-    ## 4 1151_0010 1151              0        10               10 0.389  30.3 Active  
-    ## 5 1273_8090 1273             80        90               10 0.306  30.3 Active  
-    ## 6 2012_0010 2012              0        10               10 0.387  30.3 Active  
+    ##   sample_id  core_id depth_start depth_end increment_length   lat  long Location
+    ##   <chr>      <chr>         <dbl>     <dbl>            <dbl> <dbl> <dbl> <chr>   
+    ## 1 1052_1020  1052             10        20               10 0.405  30.3 Active  
+    ## 2 1053_0010  1053              0        10               10 0.405  30.3 Active  
+    ## 3 1151_0010  1151              0        10               10 0.389  30.3 Active  
+    ## 4 1273_8090  1273             80        90               10 0.306  30.3 Active  
+    ## 5 2012_0010  2012              0        10               10 0.387  30.3 Active  
+    ## 6 2021_1001… 2021            100       110               10 0.390  30.3 Active  
     ## # ℹ 2 more variables: History <chr>, TC_gkg <dbl>
 
 # Prediction samples

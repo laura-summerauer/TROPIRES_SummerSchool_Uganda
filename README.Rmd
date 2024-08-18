@@ -18,6 +18,10 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 *Leonardo Ramirez-Lopez, Moritz Mainka, Laura Summerauer*
 
 
+```{r echo = FALSE}
+knitr::include_graphics("figures/map_overview_sets.png")
+```
+
 
 # Calibration data
 
