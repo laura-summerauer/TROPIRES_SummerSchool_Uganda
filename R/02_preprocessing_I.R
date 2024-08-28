@@ -18,9 +18,10 @@ Sys.setenv(language = "EN")
 # prospectr
 require(proximater)
 
-# USER: specify working directy
+# USER: specify working directory
 #wd <- "C:/Users/raml/Documents/pedometrics2017"
-wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
+#wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
+wd <- "C:/Users/mmainka/GitHubTROPIRES_SummerSchool_Uganda"
 
 # R: Set the working directory
 setwd(wd)
@@ -32,9 +33,12 @@ inputfile1 <- "data/noisy_spectra.txt"
 # --- 1. Read the data ----
 
 sdata <- read_spc(inputfile1, 
-                    header = TRUE, 
-                    check.names = FALSE, 
-                    sep ="\t")
+                  header = TRUE, 
+                  sep = "\t")
+
+
+colnames(sdata$spc)
+
 
 # --- 2. Noise removal ----
 
@@ -73,7 +77,7 @@ grid()
 #   (spc_smooth function) 
 
 #   USER: First define the window size (e.g. 11 bands)...
-swindow_sg <- 11
+swindow_sg <- 21
 #   USER: then, define the order of the polynomial 
 #   to fit the  points within the window (e.g. 2 )
 poly_sg <- 2
@@ -89,23 +93,13 @@ wavs_sg <- colnames(sdata$spc_sg)
 wavs_sg <- as.numeric(wavs_sg)
 
 
-# R: plot the de-noised spectra resulting from applying the moving average...                          
-matplot(x = wavs_ma, y = t(sdata$spc_ma),
-        xlab = xax,
-        ylab = yax,
-        type = "l",
-        lty = 1,
-        col = rgb(red = 0.5, green = 0, blue = 0.5, alpha = 0.3),
-        main = "De-noised spectra (moving average)")
-grid()
-
 # R: plot the de-noised spectra resulting from applying the Savitzky-Golay filter...                          
 matplot(x = wavs_sg, y = t(sdata$spc_sg),
         xlab = xax,
         ylab = yax,
         type = "l",
         lty = 1,
-        col = rgb(red = 0, green = 0.5, blue = 0.5, alpha = 0.3),
-        main = "De-noised spectra (Savitzky-Golay)")
+        col = rgb(red = 0.5, green = 0, blue = 0.5, alpha = 0.3),
+        main = "De-noised spectra (Savitzky-Golay filtered)")
 grid()
 

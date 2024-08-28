@@ -10,17 +10,17 @@
 #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # Set the language of R to English
 Sys.setenv(language = "EN")
-
+cat("\014")
 # Call the required packages
 require(proximater)
 
 # USER: specify working directory
 
 # wd <- "C:/Users/raml/Documents/pedometrics2017"
-wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
+#wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 
 # R: Set the working directory
-setwd(wd)
+#setwd(wd)
 
 # USER: specify the input files (including the subdirectory 
 # that is not specified in the working directory)
@@ -30,9 +30,8 @@ inputfile1 <- "data/spectra_soil_profile_Colombia.txt"
 
 # read the data
 sdata <- read_spc(inputfile1, 
-                    header = TRUE, 
-                    check.names = FALSE, 
-                    sep ="\t")
+                  header = TRUE, 
+                  sep ="\t")
 
 # R: extract from the column names of the spectra sub-element 
 # the vector of wavelengths/wavenumbers

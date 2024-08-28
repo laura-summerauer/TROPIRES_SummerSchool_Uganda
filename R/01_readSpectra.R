@@ -17,15 +17,13 @@ dat <- read_spc("data/world_data_3644_samples.txt")
 # filter by country
 dat <- dat %>% data.frame() %>% filter(Countryname == "Kenya")
 
-
+# create a new factor variable with two categories: High OC and Low OC (defined as > 1%)
+dat$Fert <- ifelse(dat$ORGC > 1, "High OC", "Low OC")
 
 
 # ----------------------------------------------------------------------
 # VISUALIZATION ----------------------------------------
 # ----------------------------------------------------------------------
-
-# create a new factor variable with two categories: High OM and Low OM
-dat$Fert <- ifelse(dat$ORGC > 1, "High OM", "Low OM")
 
 # R: extract from the column names of the spectra sub-element 
 # the vector of wavelengths/wavenumbers
@@ -55,7 +53,7 @@ matplot(x = wavs, y = t(dat$spc),
         ylim = c(0, 1),
         type = "l",
         lty = 1,
-        col = cols[as.factor(dat$Fert)],
+       col = cols[as.factor(dat$Fert)],
         main = "Kenyan soil NIR spectra")
 legend("topright", legend = levels(as.factor(dat$Fert)), fill = cols)
 
