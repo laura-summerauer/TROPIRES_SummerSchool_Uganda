@@ -12,6 +12,10 @@ require(tidyverse)
 # Read in data using the proximater package function read_spc
 # ----------------------------------------------------------------------
 
+# USER: SET YOUR WORKING DIRECTORY
+wd <- "C:/Users/mmainka/GitHub/TropiRes2024"
+setwd(wd)
+
 dat <- read_spc("data/world_data_3644_samples.txt")
 
 # filter by country
@@ -58,32 +62,32 @@ matplot(x = wavs, y = t(dat$spc),
 legend("topright", legend = levels(as.factor(dat$Fert)), fill = cols)
 
 
-# ----------------------------------------------------------------------
-# SPLICE CORRECTION (optional) -----------------------------------------
-# ----------------------------------------------------------------------
-
-# Note the "shifts" in the plot of the spectra at 1000 and 1830 nm. 
-# This is due to artefacts of the spectrometer. 
-# This can be corrected with the spliceCorrection function 
-# of the prospectr package
-
-# USER: Indicate the exact wavelengths at which the shits are
-# located
-sshifts <- c(1000, 1830)
-
-# R: Correct the spectral "shifts" using the spliceCorrection function 
-dat$spc_corrected <- spliceCorrection(X = dat$spc_raw, 
-                                        wav = wavs, 
-                                        splice = sshifts)
-
-
-# R: plot the corrected spectra...                          
-matplot(x = wavs, y = t(dat$spc_corrected),
-        xlab = xax,
-        ylab = yax,
-        ylim = c(0, 1),
-        type = "l",
-        lty = 1,
-        col = rgb(red = 0, green = 0, blue = 1, alpha = 0.3),
-        main = "Spectra corrected")
+# # ----------------------------------------------------------------------
+# # SPLICE CORRECTION (optional) -----------------------------------------
+# # ----------------------------------------------------------------------
+# 
+# # Note the "shifts" in the plot of the spectra at 1000 and 1830 nm. 
+# # This is due to artefacts of the spectrometer. 
+# # This can be corrected with the spliceCorrection function 
+# # of the prospectr package
+# 
+# # USER: Indicate the exact wavelengths at which the shits are
+# # located
+# sshifts <- c(1000, 1830)
+# 
+# # R: Correct the spectral "shifts" using the spliceCorrection function 
+# dat$spc_corrected <- spliceCorrection(X = dat$spc, 
+#                                         wav = wavs, 
+#                                         splice = sshifts)
+# 
+# 
+# # R: plot the corrected spectra...                          
+# matplot(x = wavs, y = t(dat$spc_corrected),
+#         xlab = xax,
+#         ylab = yax,
+#         ylim = c(0, 1),
+#         type = "l",
+#         lty = 1,
+#         col = rgb(red = 0, green = 0, blue = 1, alpha = 0.3),
+#         main = "Spectra corrected")
 

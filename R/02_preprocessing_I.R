@@ -19,9 +19,7 @@ Sys.setenv(language = "EN")
 require(proximater)
 
 # USER: specify working directory
-#wd <- "C:/Users/raml/Documents/pedometrics2017"
-#wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
-wd <- "C:/Users/mmainka/GitHubTROPIRES_SummerSchool_Uganda"
+wd <- "C:/Users/mmainka/GitHub/TROPIRES_SummerSchool_Uganda"
 
 # R: Set the working directory
 setwd(wd)

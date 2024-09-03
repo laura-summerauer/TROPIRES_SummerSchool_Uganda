@@ -34,8 +34,7 @@ inputfile1 <- "data/br_spectra_1.txt"
 
 # R: read the data
 sdata <- read_spc(inputfile1, 
-                    header = TRUE, 
-                    check.names = FALSE, 
+                    header = TRUE,
                     sep ="\t")
 
 # R: extract from the column names of the spectra sub-element 

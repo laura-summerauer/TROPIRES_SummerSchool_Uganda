@@ -38,8 +38,7 @@ require(clhs)
 #  See Ramirez-Lopez,  et al. (2014) for more details. 
 
 
-# USER: specifiy working directy
-# wd <- "C:/Users/raml/Documents/pedometrics2017"
+# USER: specifiy working directory
 wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 
 
@@ -47,7 +46,7 @@ wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 setwd(wd)
 
 # USER: specifiy the input files (including the subdirectory 
-# that is not specified in the working directy)
+# that is not specified in the working directory)
 inputfile1 <- "data/br_spectra_4.txt"
 
 

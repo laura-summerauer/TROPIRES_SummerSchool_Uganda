@@ -35,7 +35,6 @@ require(clhs)
 
 
 # USER: specifiy working directy
-# wd <- "C:/Users/raml/Documents/pedometrics2017"
 wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 
 
@@ -54,7 +53,6 @@ inputfile2 <- "data/br_spectra_4.txt"
 # R: read the file containing the synthetic grid
 griddata <- read.table(inputfile1, 
                        header = TRUE, 
-                       check.names = FALSE, 
                        sep ="\t")
 
 # R: get a summary of the data (Compactly Display the Structure of the object)

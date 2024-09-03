@@ -15,12 +15,10 @@ cat("\014")
 require(proximater)
 
 # USER: specify working directory
-
-# wd <- "C:/Users/raml/Documents/pedometrics2017"
-#wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
+wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 
 # R: Set the working directory
-#setwd(wd)
+setwd(wd)
 
 # USER: specify the input files (including the subdirectory 
 # that is not specified in the working directory)
@@ -118,7 +116,7 @@ difforder_b <- 2
 # Note that the 2 first and last wavelengths are lost in the process
 # (i.e. the vector of wavelengths is shorter now because of the window size
 # of 11 bands. 
-# The number of wavelengths lost at the begining and 
+# The number of wavelengths lost at the beginning and 
 # at the the of the spectra is (window size  - 1)/2
 sdata$spc_sgdiff_2nd <- spc_derivative(X = sdata$spc, m = difforder_b, a = poly_sg, w = swindow_sg) 
 

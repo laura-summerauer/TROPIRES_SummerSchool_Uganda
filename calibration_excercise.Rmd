@@ -36,12 +36,12 @@ This analysis involves working with soil spectroscopy data. We will perform prep
 
 First, we load the required libraries and set the working directory. and then we load the soil spectroscopy data from an RDS file.
 
-```{r}
+```{r, message = FALSE}
 library(proximater)
 wd <- "C:/Users/mmainka/GitHub/TROPIRES_SummerSchool_Uganda"
 setwd(wd)
 
-my_soil <- readRDS("NIRabs_allUganda_noSaaka.rds")
+my_soil <- readRDS("data/NIRabs_allUganda_noSaaka.rds")
 ```
 
 

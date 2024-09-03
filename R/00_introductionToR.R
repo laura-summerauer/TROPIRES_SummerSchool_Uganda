@@ -27,7 +27,7 @@ print(a+b)
 # Vector
 a <- numeric(10)
 
-# Indexing
+# Indexing (Referring to a specific part of a vector)
 a[2] <- 5
 
 # Concatenate vector
@@ -35,7 +35,8 @@ b <- c(1, 2, 3, 45, 10, 99, 6, 7, 8, 9)
 
 # Data frames
 df <- data.frame(a = a, b = b)
-# Call a column
+
+# Call a column of a dataframe using $
 df$a 
 
 # Matrix
@@ -55,8 +56,10 @@ chr <- c("My", "name", "is", "Moritz")
 
 lst <- list(chr, df, a)
 
-# Base plot
+# Create a basic scatter plot
+
 x <- seq(1, 10, 1)
 y <- seq(1, 100, 10)
+
 plot(x = x, y = y)
 

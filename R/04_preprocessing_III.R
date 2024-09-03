@@ -19,7 +19,6 @@ require(proximater)
 require(prospectr)
 
 # USER: specify working directory
-# wd <- "C:/Users/raml/Documents/pedometrics2017"
 wd <- "C:/Users/mmainka/Github/TROPIRES_SummerSchool_Uganda"
 
 # R: Set the working directory
@@ -32,7 +31,6 @@ inputfile1 <- "data/br_spectra_1.txt"
 # R: read the data
 sdata <- read_spc(inputfile1, 
                   header = TRUE, 
-                  check.names = FALSE, 
                   sep ="\t")
 
 
@@ -91,8 +89,7 @@ inputfile2 <- "data/br_spectra_2.txt"
 # USER: read the new data and organize it
 # R: read the data
 new_data <- read_spc(inputfile2, 
-                     header = TRUE, 
-                     check.names = FALSE, 
+                     header = TRUE,
                      sep ="\t")
 
 # R: apply the msc correction to the new spectra 
